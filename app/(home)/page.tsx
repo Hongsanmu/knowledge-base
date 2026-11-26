@@ -15,10 +15,10 @@ export default function HomePage() {
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-fd-primary">
             Atlas Knowledge Base
           </p>
-          <h1 className="mt-5 text-4xl font-semibold tracking-normal text-zinc-950 sm:text-6xl">
+          <h1 className="mt-5 text-4xl font-semibold tracking-normal text-fd-foreground sm:text-6xl">
             把知识库整理成清晰、统一、可持续维护的网站。
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-fd-muted-foreground">
             每个知识库独立成组，进入后仍然使用 Fumadocs
             的文档页、左侧导航和搜索体验。
           </p>
@@ -44,8 +44,8 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-6 py-12 sm:px-8 lg:px-10">
         <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-2xl font-semibold text-zinc-950">最近文档</h2>
-            <p className="mt-2 text-sm text-zinc-600">
+            <h2 className="text-2xl font-semibold text-fd-foreground">最近文档</h2>
+            <p className="mt-2 text-sm text-fd-muted-foreground">
               从这里进入常用页面，或在文档页按 Cmd/Ctrl + K 搜索。
             </p>
           </div>

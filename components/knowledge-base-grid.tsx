@@ -19,7 +19,7 @@ export function KnowledgeBaseGrid({ items }: { items: KnowledgeBaseCardData[] })
       <div>
         <div>
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-fd-primary">Knowledge Bases</p>
-          <h2 className="mt-2 text-2xl font-semibold text-zinc-950">全部知识库</h2>
+          <h2 className="mt-2 text-2xl font-semibold text-fd-foreground">全部知识库</h2>
         </div>
       </div>
 
