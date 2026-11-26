@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import SearchDialog from "@/components/search";
+import { siteConfig } from "@/config/site";
 
 import "./global.css";
 
 export const metadata: Metadata = {
-  title: { template: "%s | 知识库", default: "知识库" },
-  description: "把团队知识整理成清晰、可搜索、可持续维护的网站",
+  title: { template: siteConfig.titleTemplate, default: siteConfig.name },
+  description: siteConfig.description,
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📚</text></svg>',
   },

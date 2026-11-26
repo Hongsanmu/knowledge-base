@@ -1,13 +1,13 @@
 import { docs } from "collections/server";
 import { loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
-import { docsImageRoute, docsRoute } from "./shared";
+import { siteConfig } from "@/config/site";
 import { icons } from "lucide-react";
 import { createElement } from "react";
 
 // See https://fumadocs.dev/docs/headless/source-api for more info
 export const source = loader({
-  baseUrl: docsRoute,
+  baseUrl: siteConfig.docs.route,
   source: docs.toFumadocsSource(),
   plugins: [lucideIconsPlugin()],
   icon(icon) {
@@ -24,6 +24,6 @@ export function getPageImage(page: (typeof source)["$inferPage"]) {
 
   return {
     segments,
-    url: `${docsImageRoute}/${segments.join("/")}`,
+    url: `${siteConfig.docs.imageRoute}/${segments.join("/")}`,
   };
 }
