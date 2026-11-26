@@ -1,0 +1,6 @@
+{
+  "title": "rust 生命周期",
+  "icon": "CircleChevronRight",
+  "defaultOpen": true,
+  "pages": ["introduction"]
+}

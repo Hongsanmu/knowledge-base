@@ -1,0 +1,6 @@
+{
+  "title": "知乎",
+  "root": true,
+  "defaultOpen": true,
+  "pages": ["index", "jiehun"]
+}

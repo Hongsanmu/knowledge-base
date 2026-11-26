@@ -1,0 +1,6 @@
+{
+  "title": "快速上手",
+  "icon": "Airplay",
+  "defaultOpen": true,
+  "pages": ["---beginer---", "index", "---advance---", "content-model"]
+}

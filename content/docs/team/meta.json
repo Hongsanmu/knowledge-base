@@ -1,0 +1,14 @@
+{
+  "title": "团队知识库",
+  "root": true,
+  "defaultOpen": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "playbooks",
+    "reference",
+    "zhihu",
+    "zhishiku",
+    "test"
+  ]
+}

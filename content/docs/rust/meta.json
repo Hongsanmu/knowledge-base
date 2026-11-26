@@ -1,0 +1,6 @@
+{
+  "title": "Rust",
+  "root": true,
+  "defaultOpen": true,
+  "pages": ["index" , "lifetime" , "deref"]
+}

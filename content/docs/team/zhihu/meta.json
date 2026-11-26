@@ -1,0 +1,6 @@
+{
+  "title": "知乎",
+  "icon": "Bird",
+  "defaultOpen": true,
+  "pages": ["index"]
+}

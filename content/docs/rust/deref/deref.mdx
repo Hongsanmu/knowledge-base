@@ -1,0 +1,74 @@
+---
+title: Deref
+icon: CircleQuestionMark
+description: Rust deref 机制
+---
+
+# 引用归一化
+
+Rust 编译器实际上只能对 `&v` 形式的引用进行解引用操作，那么问题来了，如果是一个智能指针或者 `&&&&v` 类型的呢？ 该如何对这两个进行解引用？
+答案是：Rust 会在解引用时自动把智能指针和 `&&&&v` 做引用归一化操作，转换成 `&v` 形式，最终再对 `&v` 进行解引用：
+
+- 把智能指针（比如在库中定义的，`Box、Rc、Arc、Cow` 等）从结构体脱壳为内部的引用类型，也就是转成结构体内部的 `&v`
+  把多重如 `&&&&&&&v`，归一成 `&v`
+
+关于第二种情况，这么干巴巴的说，也许大家会迷迷糊糊的，我们来看一段标准库源码：
+
+```rust
+impl<T: ?Sized> Deref for &T {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        *self
+    }
+}
+```
+
+在这段源码中，`&T` 被自动解引用为 `T`，也就是 `&T: Deref<Target=T>` 。 按照这个代码，`&&&&T` 会被自动解引用为 `&&&T`，然后再自动解引用为 `&&T`，以此类推， 直到最终变成 `&T`。
+
+# Deref 机制
+
+- `*x`：解引用运算符（对 `&T/&mut T` 是语言内建；对 `Box<T>` 之类会走 `Deref`）
+- `x.deref()`：调用 `Deref trait` 的方法（就是普通方法调用）
+- 不管调用多少次 `deref(）`最后得到的都是一个引用 需要使用 `*` ，`deref` 只是用于隐式转换
+- 对 `Box` `*box` 相当于 `*(box.deref())`
+
+# 自动deref 何时触发？
+
+点操作符（.）的自动寻路机制和解引用多态（Deref Coercion）。只要不涉及“方法调用的点操作符 .”或者“引用的传递 &”，Rust 绝对不会自动解引用。
+
+在 Rust 中，自动解引用只会在以下三种明确的场景下发生：
+
+## 场景 A：使用点操作符（.）调用方法时
+
+## 场景 B：函数或方法的参数传递时（要求是引用
+
+如果你把一个引用传给函数，但类型不匹配，只要源类型实现了 Deref 并能转换成目标类型，编译器就会自动帮你转。
+
+- 规则：`&T` 会被自动转换为 `&U`（前提是 `T` 实现了 `Deref<Target=U>`）。
+
+```rust
+fn print_len(s: &str) { ... }
+
+let s = MyBox::new(String::from("hello"));
+// s 是 MyBox<String>
+// &s 是 &MyBox<String>
+// 编译器自动：&MyBox<String> -> &String -> &str
+print_len(&s);
+```
+
+## 场景 C：变量赋值且有显式类型标注时
+
+和函数传参类似，如果你在 let 绑定时明确写了目标引用类型，Rust 也会顺水推舟帮你转换。
+
+```rust
+let s = MyBox::new(String::from("hello"));
+// 明确告诉编译器我要 &str，你看着办
+let s2: &str = &s; // 自动从 &MyBox<String> 解引用到 &str
+```
+
+## Callout
+
+<Callout title="Title" type="error">
+  Hello World
+</Callout>

@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+@import 'fumadocs-twoslash/twoslash.css';
+
+@theme {
+  --color-fd-primary: #cc8b00;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-accent: color-mix(in oklab, #cc8b00 12%, transparent);
+  --color-fd-accent-foreground: #6b4700;
+  --color-fd-ring: #cc8b00;
+}
+
+:root,
+:host,
+html.light,
+html.dark {
+  --kb-primary: #cc8b00;
+  --kb-primary-foreground: #ffffff;
+  --kb-accent: #6b4700;
+  --color-fd-primary: var(--kb-primary);
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-accent: color-mix(in oklab, var(--kb-primary) 12%, transparent);
+  --color-fd-accent-foreground: var(--kb-accent);
+  --color-fd-ring: var(--kb-primary);
+}
+
+/* 中文长文阅读优化 */
+article.nd-prose {
+  font-family: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  font-size: 0.75rem;
+
+  p {
+    line-height: 1.85;
+    margin-block: 1.25em;
+    letter-spacing: 0.01em;
+  }
+
+  h2 {
+    margin-top: 2.5em;
+  }
+
+  h3 {
+    margin-top: 2em;
+  }
+}
+
+.bookmark-card.microlink_card {
+  --microlink-max-width: 100%;
+  --microlink-background-color: color-mix(in oklab, var(--color-fd-muted) 64%, transparent);
+  --microlink-border-color: color-mix(in oklab, var(--color-fd-border) 86%, transparent);
+  --microlink-color: var(--color-fd-foreground);
+  --microlink-hover-background-color: color-mix(in oklab, var(--color-fd-muted) 82%, transparent);
+  --microlink-hover-border-color: color-mix(in oklab, var(--color-fd-muted-foreground) 28%, var(--color-fd-border));
+
+  width: 100%;
+  min-height: 7.75rem;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+
+html.dark .bookmark-card.microlink_card {
+  --microlink-background-color: color-mix(in oklab, var(--color-fd-muted) 55%, transparent);
+  --microlink-border-color: color-mix(in oklab, var(--color-fd-muted-foreground) 22%, var(--color-fd-border));
+  --microlink-hover-background-color: color-mix(in oklab, var(--color-fd-muted) 72%, transparent);
+  --microlink-hover-border-color: color-mix(in oklab, var(--color-fd-muted-foreground) 38%, var(--color-fd-border));
+}
+
+.bookmark-card .microlink_card__media {
+  flex: 0 0 6.5rem;
+  width: 6.5rem;
+  height: 6.5rem;
+  margin: 1rem 0 1rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-fd-background);
+  background-size: cover;
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-fd-border) 70%, transparent);
+}
+
+.bookmark-card .microlink_card__media::before {
+  display: none;
+}
+
+.bookmark-card .microlink_card__content {
+  min-width: 0;
+  padding: 1.15rem 1.25rem 1rem 1.5rem;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.bookmark-card .microlink_card__content_title {
+  flex-grow: 0;
+  overflow: hidden;
+  color: var(--color-fd-foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-card .microlink_card__content_description {
+  flex-grow: 0;
+  overflow: hidden;
+  color: color-mix(in oklab, var(--color-fd-muted-foreground) 96%, var(--color-fd-foreground));
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-card .microlink_card__content_url {
+  color: color-mix(in oklab, var(--color-fd-muted-foreground) 82%, transparent);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .bookmark-card.microlink_card {
+    min-height: 5.75rem;
+  }
+
+  .bookmark-card .microlink_card__media {
+    flex-basis: 4.5rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: 0.75rem 0 0.75rem 0.75rem;
+  }
+
+  .bookmark-card .microlink_card__content {
+    padding: 0.85rem 0.9rem 0.75rem 1rem;
+    gap: 0.25rem;
+  }
+
+  .bookmark-card .microlink_card__content_title {
+    font-size: 0.9rem;
+  }
+
+  .bookmark-card .microlink_card__content_description,
+  .bookmark-card .microlink_card__content_url {
+    font-size: 0.78rem;
+  }
+}
+
+.notion-shell {
+  color: var(--color-fd-foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
