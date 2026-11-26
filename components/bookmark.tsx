@@ -11,7 +11,6 @@ export function Bookmark({ href }: {
       url={href}
       size="normal"
       media={["screenshot", "image", "logo"]}
-      lazy={false}
     />
   );
 }
