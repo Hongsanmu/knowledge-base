@@ -2,10 +2,12 @@
 
 import { usePathname } from 'next/navigation';
 import type { CSSProperties, ReactNode } from 'react';
-import { getKnowledgeBaseThemeByRoot } from '@/lib/knowledge-base-themes';
+import { useTheme } from 'fumadocs-ui/provider/base';
+import { getKnowledgeBaseThemeByRoot } from '@/config/knowledge-bases';
 
 export function DocsThemeProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const { resolvedTheme } = useTheme();
   const segments = pathname.split('/');
   const docsRoot = segments[2];
   const theme = getKnowledgeBaseThemeByRoot(docsRoot);
@@ -15,8 +17,12 @@ export function DocsThemeProvider({ children }: { children: ReactNode }) {
     '--kb-accent': theme.accent,
     '--color-fd-primary': theme.primary,
     '--color-fd-primary-foreground': '#ffffff',
-    '--color-fd-accent': theme.secondary,
-    '--color-fd-accent-foreground': theme.accent,
+    '--color-fd-accent':
+      resolvedTheme === 'dark'
+        ? `color-mix(in oklab, ${theme.primary} 12%, transparent)`
+        : theme.secondary,
+    '--color-fd-accent-foreground':
+      resolvedTheme === 'dark' ? 'var(--color-fd-foreground)' : theme.accent,
     '--color-fd-ring': theme.primary,
   } as CSSProperties;
 

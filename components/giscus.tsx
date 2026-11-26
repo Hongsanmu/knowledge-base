@@ -1,9 +1,14 @@
 'use client';
 
 import GiscusReact from '@giscus/react';
-import { giscusConfig } from '@/lib/shared';
+import { useTheme } from 'fumadocs-ui/provider/base';
+import { siteConfig } from '@/config/site';
+
+const giscusConfig = siteConfig.giscus;
 
 export function Giscus({ term }: { term?: string }) {
+  const { resolvedTheme } = useTheme();
+
   if (
     giscusConfig.repoId === 'YOUR_REPO_ID' ||
     giscusConfig.categoryId === 'YOUR_CATEGORY_ID'
@@ -24,7 +29,7 @@ export function Giscus({ term }: { term?: string }) {
         reactionsEnabled="1"
         emitMetadata="0"
         inputPosition="bottom"
-        theme="light"
+        theme={resolvedTheme === 'dark' ? 'dark' : 'light'}
         lang={giscusConfig.lang}
       />
     </div>
